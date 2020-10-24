@@ -25,7 +25,7 @@ public class NoRestartJob {
 
         Logger log = LoggerFactory.getLogger(NoRestartJob.class);
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        //设置秉性度
+        //设置并行度
         env.setParallelism(1);
         //设置重启策略
         env.setRestartStrategy(RestartStrategies.noRestart());
