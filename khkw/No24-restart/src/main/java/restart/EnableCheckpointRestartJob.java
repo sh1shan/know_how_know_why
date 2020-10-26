@@ -24,6 +24,7 @@ public class EnableCheckpointRestartJob {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
+        //打开cp
         env.enableCheckpointing(2000);
 
         DataStream<Tuple3<String, Integer, Long>> source = env

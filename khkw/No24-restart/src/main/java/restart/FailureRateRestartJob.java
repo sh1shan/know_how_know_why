@@ -29,7 +29,8 @@ public class FailureRateRestartJob {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-       env.setRestartStrategy(
+        //失败率的重启策略：前面两个5：5分钟内不能出现5次错误；最后一个5的意思：作业重启间隔是5秒
+        env.setRestartStrategy(
                RestartStrategies.failureRateRestart(
                        5, Time.of(5, TimeUnit.SECONDS), Time.of(5, TimeUnit.SECONDS)));
 

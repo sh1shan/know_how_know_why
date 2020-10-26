@@ -37,11 +37,9 @@ public class FixedDelayRestartJob {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
+        //固定频率的重启策略：这里两秒的意思是，失败两秒后重启作业，3的意思是失败次数
         env.setRestartStrategy(
                 RestartStrategies.fixedDelayRestart(3, Time.of(2, TimeUnit.SECONDS) ));
-
-//        env.setRestartStrategy(
-//                RestartStrategies.fixedDelayRestart(3, Time.of(3, TimeUnit.SECONDS) ));
 
         DataStream<Tuple3<String, Integer, Long>> source = env
                 .addSource(new SourceFunction<Tuple3<String, Integer, Long>>() {
