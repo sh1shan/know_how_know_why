@@ -28,9 +28,10 @@ import java.sql.Timestamp;
  *          - restart-strategy: fixed-delay
  *          - restart-strategy.fixed-delay.attempts: 3
  *          - restart-strategy.fixed-delay.delay: 2 s
- *          配置checkpoint保存个数
+ *          配置checkpoint保存个数 --不然会不断的保存，存储带来压力
  *          - state.checkpoints.num-retained: 2
  *          配置local recovery for this state backend
+ *          -- 当我这个作业失败的时候，jobMaster从新启动Task的时候，优先考虑之前运行的机器，这样State就不用远端的拉取。提升作业恢复的速度
  *          - state.backend.local-recovery: true
  *
  *        4. bin/start-cluster.sh local
