@@ -36,6 +36,7 @@ public class CheckpointedSourceTestCase {
     }
 
     private static void nonParallel(StreamExecutionEnvironment env) {
+        //这个SourceFunction不支持多并发
         env.setParallelism(1);
         env.addSource(new NonParallelCheckpointedSource())
                 .map(new MapFunctionWithException())
@@ -44,6 +45,7 @@ public class CheckpointedSourceTestCase {
     }
 
     private static void parallel(StreamExecutionEnvironment env) {
+        //RichParallelSourceFunction支持多并发
         env.setParallelism(2);
         env.addSource(new ParallelCheckpointedSource())
                 .map(new MapFunctionWithException())

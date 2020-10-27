@@ -11,6 +11,7 @@ import org.apache.flink.api.java.tuple.Tuple3;
 public class Tuple3KeySelector implements KeySelector<Tuple3<String, Long, Long>, String> {
     @Override
     public String getKey(Tuple3<String, Long, Long> event) throws Exception {
+        //想要哪个元素作为key，返回就可以了
         return event.f0;
     }
 }

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class NonParallelCheckpointedSource
         implements SourceFunction<Tuple3<String, Long, Long>>, CheckpointedFunction {
-
+    //这个SourceFunction不支持多并发
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(NonParallelCheckpointedSource.class);
     // 标示数据源一直在取数据
@@ -43,6 +43,12 @@ public class NonParallelCheckpointedSource
         }
     }
 
+    /**
+     * 这个方法就是存储业务需要的state，这边就是source的offset
+     * 框架在cp的时候会固定回掉这个方法，
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void snapshotState(FunctionSnapshotContext ctx) throws Exception {
         if (!running) {
@@ -50,11 +56,16 @@ public class NonParallelCheckpointedSource
         } else {
             // 清除上次的state
             this.offsetState.clear();
-            // 持久化最新的offset
+            // 持久化最新的offset到stateBackend
             this.offsetState.add(offset);
         }
     }
 
+    /**
+     * 作业恢复的时候，可以添加恢复逻辑，一般都是从state中恢复作业的状态
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void initializeState(FunctionInitializationContext ctx) throws Exception {
         this.offsetState = ctx

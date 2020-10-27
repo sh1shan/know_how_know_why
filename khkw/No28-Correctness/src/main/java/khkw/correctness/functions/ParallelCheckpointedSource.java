@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 public class ParallelCheckpointedSource
         extends RichParallelSourceFunction<Tuple3<String, Long, Long>>
         implements CheckpointedFunction {
+    //RichParallelSourceFunction支持多并发
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(ParallelCheckpointedSource.class);
     // 标示数据源一直在取数据
