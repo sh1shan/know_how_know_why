@@ -19,7 +19,7 @@ public class Kafka2Print {
     public static void main(String[] args) throws Exception {
         // Kafka
         String sourceDDL = "CREATE TABLE kafka_source (\n" +
-                " log_msg STRING\n" +
+                " msg STRING\n" +
                 ") WITH (\n" +
                 " 'connector' = 'kafka-0.11',\n" +
                 " 'topic' = 'cdn-log',\n" +
@@ -30,7 +30,7 @@ public class Kafka2Print {
 
         // Mysql
         String sinkDDL = "CREATE TABLE print_sink (\n" +
-                " f_random_str STRING \n" +
+                " msg STRING \n" +
                 ") WITH (\n" +
                 " 'connector' = 'print'\n" +
                 ")";

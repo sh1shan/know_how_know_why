@@ -19,6 +19,7 @@ public class App {
                 " f_sequence INT,\n" +
                 " f_random INT,\n" +
                 " f_random_str STRING\n" +
+                // 所有connector 需要配置的属性，我们在这里with里边配置
                 ") WITH (\n" +
                 " 'connector' = 'datagen',\n" +
                 " 'rows-per-second'='5',\n" +
