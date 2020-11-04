@@ -44,9 +44,9 @@ services:
       HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
       KAFKA_CREATE_TOPICS: "payment_msg:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
-     KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-   mysql:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+  mysql:
      image: mysql:5.7
      container_name: mysql
      volumes:
